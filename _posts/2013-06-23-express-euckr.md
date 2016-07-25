@@ -1,8 +1,7 @@
 ---
 layout: post
+title: express.js에서 UTF-8, EUC-KR HTML 파일을 같이 제공하려 할 때 EUC-KR HTML 파일에 `<meta charset="euc-kr">` 등으로 캐릭터셋을 명시했음에도 불구하고 한글이 깨져보이는 경우가 있다.
 ---
-
-express.js에서 UTF-8, EUC-KR HTML 파일을 같이 제공하려 할 때 EUC-KR HTML 파일에 `<meta charset="euc-kr">` 등으로 캐릭터셋을 명시했음에도 불구하고 한글이 깨져보이는 경우가 있다.
 
 문제는 express.js가 HTML 파일의 HTTP response의 `Content-Type` 헤더 기본값을 `text/html; charset=UTF-8`로 제공하기 때문이다. 이 헤더는 HTML 파일의 캐릭터셋 설정에 우선하여 제공되므로 브라우저가 무조건 UTF-8로 HTML 파일을 렌더링하게 된다.
 

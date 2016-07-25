@@ -1,7 +1,9 @@
 ---
 layout: post
-title: [SOLVED] E:Encountered a section with no Package: header, E:Problem with MergeList
+title: ubuntu 12.04 Problem with MergeList 오류 해결
 ---
+
+(SOLVED) E:Encountered a section with no Package: header, E:Problem with MergeList
 
 ubuntu 12.04에서 아래와 같은 오류가 나서
 

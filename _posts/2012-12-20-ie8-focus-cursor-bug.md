@@ -1,8 +1,7 @@
 ---
 layout: post
+title: IE8에서 input에 value가 있는데 focus될 때 value를 없애는 경우 cursor가 안보이는 버그가 있다.
 ---
-
-IE8에서 input에 value가 있는데 focus될 때 value를 없애는 경우 cursor가 안보이는 버그가 있다.
 
 이 때 value를 없앤 후 input에 select() method를 한번 콜해주면 cursor가 다시 보인다.
 
