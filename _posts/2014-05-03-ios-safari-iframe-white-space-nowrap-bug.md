@@ -1,7 +1,7 @@
-----
+---
 layout: post
-title: iOS의 Safari에 iframe이 쓰였을 때 `white-space: nowrap` CSS 코드가 쓰인 경우 frame의 크기가 제대로 표시되지 않는 버그가 있다.
-----
+title: iOS의 Safari에 iframe이 쓰였을 때 white-space nowrap CSS 코드가 쓰인 경우 frame의 크기가 제대로 표시되지 않는 버그가 있다.
+---
 
 다음 예제를 보자.
 
