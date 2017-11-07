@@ -13,7 +13,7 @@ HTML은 마크업 문서를 만든다. HTML의 `img`, `a`, `button`, `input` 등
 
 난 당연히 전자와 같이 제공해야 한다고 생각한다. 왜냐하면 후자는 중복이기 때문이다. `img` 태그가 이미 이미지라는 의미를 제공하는데 대체 텍스트에 "이미지"라는 텍스트를 넣는 것은 의미의 반복이다. 아래의 코드들은 위 코드의 후자의 경우와 마찬가지로 중복이다.
 
-    <a href="http://miya.pe.kr">겨미겨미 링크</a>
+    <a href="http://daum.net">겨미겨미 링크</a>
     <button type="submit">확인 버튼</button>
     <label><input type="checkbox"> 1번 체크</label>
     <label>
