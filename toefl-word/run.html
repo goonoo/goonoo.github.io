@@ -1,13 +1,61 @@
-<style>
-#b { font-size: 40px }
-</style>
-
-<h1 id="a"></h1>
-<button id="b">GO</button>
-<h1 id="c"></h1>
-
 <!doctype html>
 <meta charset="utf-8">
+<style>
+html, body {
+  height: 100%; margin: 0;
+  color: #fff;
+  font-size: 2em;
+}
+#w {
+  height: 100%;
+  width: 100%;
+}
+#z {
+  position: absolute;
+  width: 100%;
+  height: 10%;
+  margin: 0;
+  background-color: green;
+  font-size: 0.7em;
+  color: #ddd;
+}
+#a {
+  padding-top: 10%;
+  width: 100%;
+  height: 50%;
+  background-color: blue;
+  text-align: center;
+  display: table;
+}
+#b, #d {
+  display: table-cell;
+  vertical-align: middle;
+}
+#c {
+  position: relative;
+  width: 100%;
+  height: 40%;
+  background-color: red;
+  text-align: center;
+  display: table;
+}
+#e {
+  position: relative;
+  width: 100%;
+  height: 10%;
+  background-color: green;
+  text-align: center;
+}
+</style>
+
+<body>
+<div id="w">
+  <select id="z"></select>
+  <div id="a"><div id="b"></div></div>
+  <div id="c"><div id="d"></div></div>
+  <div id="e">_</div>
+</div>
+
 <script
   src="https://code.jquery.com/jquery-3.5.1.min.js"
   integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
@@ -19,26 +67,70 @@ function randomKey(obj) {
 };
 
 var data = {};
+var synth = window.speechSynthesis;
+
+setTimeout( () => {
+}, 500);
 
 function q() {
-  $("#c").html("");
-  data.key = randomKey(data.json);
-  $("#a").html(Math.random() > .5 ? data.key : data.json[data.key]);
+  $("#d").html("");
+  $("#b").html("");
+  $("#e").html("");
+  var j = data.json[$('#z').val()];
+  data.key = randomKey(j);
+  if (Math.random() > .5) {
+    $("#b").html(data.key);
+    var utterThis = new SpeechSynthesisUtterance(data.key);
+    utterThis.voice = data.voice;
+    synth.speak(utterThis);
+  } else {
+    $("#d").html(j[data.key]);
+  }
 }
 
-$("#b").on('click', function() {
-  if ($("#c").html()) {
-    q();
-  } else {
-    $("#c").html(data.key + " -> " + data.json[data.key] +
-      " <a href='https://en.dict.naver.com/#/search?range=all&query=" + data.key + "'>DICT</a>");
-  }
-});
+function s() {
+  var keys = Object.keys(data.json);
+  keys.forEach(key => {
+    $('#z').append($('<option>', {
+      value: key,
+      text: key
+    }));
+  });
+  $('#z').on('change', q);
+}
 
-fetch("./words.json")
-.then(response => response.json())
-.then(json => {
-  data.json = json;
-  q();
-});
+setTimeout( () => {
+  var voices = synth.getVoices();
+  if (voices.length > 0) data.voice = voices[0];
+  for(var i = 0; i < voices.length ; i++) {
+    if(voices[i].name === 'Google US English') {
+      data.voice = voices[i];
+      break;
+    }
+  }
+
+  fetch("./words.json")
+  .then(response => response.json())
+  .then(json => {
+    data.json = json;
+    s();
+
+    $("#a, #c").on('click', function() {
+      var j = data.json[$('#z').val()];
+      if ($("#e").html()) {
+        q();
+      } else {
+        if ($('#d').html()) {
+          var utterThis = new SpeechSynthesisUtterance(data.key);
+          utterThis.voice = data.voice;
+          synth.speak(utterThis);
+        }
+        $("#b").html(data.key);
+        $("#d").html(j[data.key]);
+        $("#e").html(
+          "<a href='https://en.dict.naver.com/#/search?range=all&query=" + data.key + "'>DICT</a>");
+      }
+    });
+  });
+}, 500);
 </script>
